@@ -41,15 +41,12 @@ You can import the helper models above and inherit from them. See example
 
 **models.py**
 
-```python```
+```python
     from simplify.helpers.model_helper import TimeBasedModel, NamedTimeBasedModel
 
     class MyModel(TimeBasedModel):
         extra_fields = ....
 ```
-
-
-
 
 ## Todo
 - auto view/url linking from command line
