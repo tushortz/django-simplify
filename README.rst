@@ -44,8 +44,11 @@ You can run the demo project using the following commands:
 Features
 ==============================================================================
 
-- TimeBasedModel (gives you access to `created_at` and `updated_at` field)
 - NamedTimeBasedModel - gives you access to the fields `name`, `created_at` and `updated_at`
+- automatically create a urls.py file
+- adds newly created app in the installed apps when you run the `python manage.py create_app <app_name>` command
+- creates `index`, `edit`, `create` and `detail` view + templates
+- updates the `project.urls` with the latest `app`
 
 You can import them using the following command
 
