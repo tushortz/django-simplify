@@ -34,7 +34,6 @@ Then just add `django-simplify` to your `INSTALLED_APPS`.
 
 Below are several example commands you can run
 
-You can run the demo project using the following commands:
 
 .. code-block:: bash
 

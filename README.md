@@ -23,9 +23,7 @@ $ pip install django-simplify
 Then just add `simplify` to your `INSTALLED_APPS`.
 
 
-Below are several example commands you can run
-
-You can run the demo project using the following commands:
+Below are several example commands you can run.
 
 ```sh
 $ python manage.py create_app <app_name>
