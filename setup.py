@@ -48,6 +48,12 @@ if __name__ == '__main__':
         url=about['__url__'],
         license=about['__license__'],
         keywords=about['__keywords__'],
+        package_data={
+            'simplify': [
+                'helpers/**/**',
+                'management/**/**',
+            ],
+        },
         packages=find_packages(exclude=['docs']),
         long_description=readme,
         include_package_data=True,
