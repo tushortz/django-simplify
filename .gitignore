@@ -149,3 +149,7 @@ nginx/
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 test_proj/
+_build/
+conf.py
+make.bat
+Makefile
