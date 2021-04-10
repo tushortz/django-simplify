@@ -3,7 +3,7 @@
 
 ## Introduction
 
-django simplify allows you to focus on development and removes the pain of repeating frequent actions like creating a urls.py. It provides several commands and custom models to make development easier. Attempts to use ruby on rails style commands as well as automate boring processes
+Django simplify provides Ruby on Rails-like command line functionalities, models and helper functions so you can focus on development and removes the pain of repeating frequent actions.
 
 ## Requirements
 
@@ -28,14 +28,18 @@ Below are several example commands you can run
 You can run the demo project using the following commands:
 
 ```sh
-$ python manage.py start_app_url <app_name>
+$ python manage.py create_app <app_name>
 ```
 
 ## Features
 
 - TimeBasedModel (gives you access to `created_at` and `updated_at` field)
 - NamedTimeBasedModel - gives you access to the fields `name`, `created_at` and `updated_at`
-- automatically create a urls.py file and adds the newly created app in the installed apps when you run the `python manage.py start_app_url <app_name>` command
+- automatically create a urls.py file
+- adds newly created app in the installed apps when you run the `python manage.py create_app <app_name>` command
+- creates `index`, `edit`, `create` and `detail` view + templates
+- updates the `project.urls` with the latest `app`
+
 
 You can import the helper models above and inherit from them. See example
 
@@ -49,7 +53,6 @@ class MyModel(TimeBasedModel):
 ```
 
 ## Todo
-- auto view/url linking from command line
 - create model from commandline
 - add helper methods
 - add documentation

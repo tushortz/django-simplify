@@ -38,7 +38,7 @@ You can run the demo project using the following commands:
 
 .. code-block:: bash
 
-    python manage.py start_app_url <app_name>
+    python manage.py create_app <app_name>
 
 
 Features
