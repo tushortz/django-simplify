@@ -47,7 +47,7 @@ if __name__ == '__main__':
         description=about['__description__'],
         url=about['__url__'],
         license=about['__license__'],
-        keywords=about['__title__'],
+        keywords=about['__keywords__'],
         packages=find_packages(exclude=['docs']),
         long_description=readme,
         include_package_data=True,
@@ -70,5 +70,9 @@ if __name__ == '__main__':
             'Programming Language :: Python :: 3.6',
             'Programming Language :: Python :: 3.7',
             'Programming Language :: Python :: 3.8',
+            'Framework :: Django',
+            'Operating System :: OS Independent',
+            'Topic :: Software Development :: Libraries :: Application Frameworks',
+            'Topic :: Software Development :: Libraries :: Python Modules',
         ],
     )
