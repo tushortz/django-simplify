@@ -54,7 +54,8 @@ Helper models
 
 - simplify.helpers.model_helper.NamedTimeBasedModel
     - Provides the `name`, `created_at` and `updated_at` fields.
-    - simplify.helpers.admin_helper.AlphaNumericFilterAdmin
+  
+- simplify.helpers.admin_helper.AlphaNumericFilterAdmin
     - when subclassed, it allows the items to be filtered alphabetically by either A-Z or 0-9
     - **Note**: for this to work, you must specify values for `alphanumeric_filter` in the model admin.
 
