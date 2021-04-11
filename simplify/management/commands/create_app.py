@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 import os
-from simplify.management.commands import _messages
+from simplify.management import _messages
 import re
 from django.conf import settings
 
