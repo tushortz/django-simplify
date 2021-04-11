@@ -30,6 +30,12 @@ $ python manage.py create_app <app_name>
 
 ## Features
 
+* timestamp for every model
+* alphabetic filter for admin
+* model, view, template and url route generator
+* automatic import
+
+
 ### Helper models
 
 - simplify.helpers.model_helper.TimeBasedModel
@@ -38,14 +44,30 @@ $ python manage.py create_app <app_name>
 - simplify.helpers.model_helper.NamedTimeBasedModel
   - Provides the `name`, `created_at` and `updated_at` fields.
 
+- simplify.helpers.admin_helper.AlphaNumericFilterAdmin
+  - when subclassed, it allows the items to be filtered alphabetically by either A-Z or 0-9
+  - **Note**: for this to work, you must specify values for `alphanumeric_filter` in the model admin.
 #### Usage
 
 ```python
+# models.py
 from simplify.helpers.model_helper import TimeBasedModel, NamedTimeBasedModel
 
 class MyModel(TimeBasedModel):
     extra_fields = ....
 ```
+
+```python
+# admin.py
+from simplify.helpers.admin_helper import AlphaNumericFilterAdmin
+
+class MemberAdmin(AlphaNumericFilterAdmin):
+    alphanumeric_filter = ["first_name", "last_name", 'age'] # this part is important
+    list_filter = ['age']
+    list_display = ['first_name', 'last_name',]
+```
+
+
 ### Management commands
 
 **1. create_app**

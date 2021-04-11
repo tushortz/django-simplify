@@ -40,6 +40,12 @@ Below are several example commands you can run.
 Features
 -----------
 
+* timestamp for every model
+* alphabetic filter for admin
+* model, view, template and url route generator
+* automatic import
+
+
 Helper models
 ################
 
@@ -48,16 +54,33 @@ Helper models
 
 - simplify.helpers.model_helper.NamedTimeBasedModel
     - Provides the `name`, `created_at` and `updated_at` fields.
+    - simplify.helpers.admin_helper.AlphaNumericFilterAdmin
+    - when subclassed, it allows the items to be filtered alphabetically by either A-Z or 0-9
+    - **Note**: for this to work, you must specify values for `alphanumeric_filter` in the model admin.
+
 
 Usage
-#######
+######
 
 .. code-block:: python
 
-    from simplify.helpers.model_helper import TimeBasedModel, NamedTimeBasedModel
+  # models.py
+  from simplify.helpers.model_helper import TimeBasedModel, NamedTimeBasedModel
+  
+  class MyModel(TimeBasedModel):
+      extra_fields = ....
 
-    class MyModel(TimeBasedModel):
-        extra_fields = ....
+
+
+.. code-block:: python
+
+  # admin.py
+  from simplify.helpers.admin_helper import AlphaNumericFilterAdmin
+  
+  class MemberAdmin(AlphaNumericFilterAdmin):
+      alphanumeric_filter = ["first_name", "last_name", 'age'] # this part is important
+      list_filter = ['age']
+      list_display = ['first_name', 'last_name',]
 
 
 Management commands
@@ -81,22 +104,23 @@ Usage
 
 **2. create_model**
 
-* Creates a model and their respective fields. the following types maps to respective Django model fields
+Creates a model and their respective fields. the following types maps to respective Django model fields
 
-    - 121, o2o or set -> OneToOneField
-    - bool -> BooleanField
-    - date -> DateField
-    - datetime or dt -> DateTimeField
-    - dict or m2m -> ManyToManyField
-    - email -> EmailField
-    - file -> FileField
-    - list or fk -> ForeignKey
-    - float -> FloatField
-    - dec -> DecimalField
-    - img or image -> ImageField
-    - int -> IntegerField
-    - str or char -> CharField
-    - txt or text -> TextField
+
+- 121, o2o or set -> OneToOneField
+- bool -> BooleanField
+- date -> DateField
+- datetime or dt -> DateTimeField
+- dict or m2m -> ManyToManyField
+- email -> EmailField
+- file -> FileField
+- list or fk -> ForeignKey
+- float -> FloatField
+- dec -> DecimalField
+- img or image -> ImageField
+- int -> IntegerField
+- str or char -> CharField
+- txt or text -> TextField
     
 
 Usage
