@@ -1,9 +1,8 @@
 from django.contrib import admin
-from django.contrib.admin import SimpleListFilter
 
 
-def __a2z_filter(_field):
-    class ModelFilter(SimpleListFilter):
+def _a2z_filter(_field):
+    class ModelFilter(admin.SimpleListFilter):
         field = _field
         title = f'alphabet - {_field.replace("_", " ")}'
         parameter_name = f"{field}__alpha"
@@ -33,6 +32,8 @@ class AlphaNumericFilterAdmin(admin.ModelAdmin):
         self.model = model
         self.opts = model._meta
         self.admin_site = admin_site
+        
+        if getattr(self, 'alphanumeric_filter', []):
+            _filter = [_a2z_filter(x) for x in self.alphanumeric_filter]
+            self.list_filter = list(self.list_filter) + _filter
 
-        _filter = [__a2z_filter(x) for x in self.alphanumeric_filter]
-        self.list_filter += _filter

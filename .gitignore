@@ -153,3 +153,4 @@ _build/
 conf.py
 make.bat
 Makefile
+clean.sh

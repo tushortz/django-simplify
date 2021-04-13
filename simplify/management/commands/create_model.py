@@ -10,6 +10,7 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument('params', nargs='+', type=str)
+        
 
     def handle(self, *args, **options):
         params = options['params']
@@ -64,5 +65,30 @@ class Command(BaseCommand):
         if not _model_template in content:
             with open(f"{app_name}/models.py", "a") as f:
                     f.write(model_code)
+                    self.stdout.write(self.style.SUCCESS(f'{app_name}/models.py" updated'))
 
-                
+        # update admin.py      
+        with open(f"{app_name}/admin.py") as f:
+            content = f.read()
+
+        # dont add to admin if already present
+        if re.search(rf".register.*?{model_name}", content):
+            self.stdout.write(self.style.WARNING()(f'{app_name}.{model_name} has already been registered'))
+
+            return
+
+        with open(f"{app_name}/admin.py", "w") as f:
+            import_ = f"from {app_name}.models import {model_name}\n"
+            first_field = model_fields[0].split(":")[0]
+            admin_ = f"""
+@admin.register({model_name})
+class {model_name}Admin(admin.ModelAdmin):
+    list_display = ['{first_field}']
+    ordering = ['{first_field}']
+
+"""
+
+            
+            admin_data = import_ + content + admin_
+            f.write(admin_data)
+            self.stdout.write(self.style.SUCCESS(f'{app_name}/admin.py" updated'))

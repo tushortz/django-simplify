@@ -79,7 +79,7 @@ Usage
   from simplify.helpers.admin_helper import AlphaNumericFilterAdmin
   
   class MemberAdmin(AlphaNumericFilterAdmin):
-      alphanumeric_filter = ["first_name", "last_name", 'age'] # this part is important
+      alphanumeric_filter = ["first_name", "last_name", 'age'] # this part is what creates the filter
       list_filter = ['age']
       list_display = ['first_name', 'last_name',]
 
@@ -105,7 +105,7 @@ Usage
 
 **2. create_model**
 
-Creates a model and their respective fields. the following types maps to respective Django model fields
+Creates a model and their respective fields. the following types maps to respective Django model fields. It will also add the app to the django admin too.
 
 
 - 121, o2o or set -> OneToOneField
@@ -187,12 +187,33 @@ will create the following
             return self.name
 
 
+
+**3. create_view**
+
+Creates a view, generate its respective template and adds the path in the urls.py file
+
+Usage
+########
+
+.. code-block:: bash
+
+    $ python manage.py create_view <app_name> <view_name> 
+
+
+an example
+###########
+
+.. code-block:: bash
+
+    $ python manage.py create_view member MemberDetail
+
+
+    
 Todo
------------
+-----
 
 - add more helper functions
 - add documentation
-
 
 
 .. note:: 
