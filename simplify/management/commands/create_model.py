@@ -22,6 +22,7 @@ class Command(BaseCommand):
 
         
         app_name, model_name, *model_fields = params
+        app_name = app_name.lower()
 
         _model_template = f"class {model_name}(TimeBasedModel):\n"
         _field_template = ""

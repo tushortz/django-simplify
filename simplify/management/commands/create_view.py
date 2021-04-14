@@ -5,25 +5,20 @@ import re
 from django.conf import settings
 
 class Command(BaseCommand):
-    help = 'Creates an app including urls.py'
+    help = 'Creates a view in the app views.py file. \nusage: python manage.py create_view <app_name> <view_name>'
 
     def add_arguments(self, parser):
-        parser.add_argument('app_name', nargs='+', type=str)
+        parser.add_argument('params', nargs='+', type=str)
 
     def handle(self, *args, **options):
-        params = options['app_name']
+        params = options['params']
 
         if len(params) != 2:
-            self.stdout.write(self.style.WARNING("Use format python manage.py create_view <app_name> <view_name> <view_action e.g. c,r,u,d, or i>"))
-    
+            self.stdout.write(self.style.WARNING("Use format python manage.py create_view <app_name> <view_name>"))
+
 
         app_name, view_name, *crud_value = params
-        if crud_value: 
-            crud_value = crud_value[0][0]
-        else:
-            crud_value = 'l'
-        
-
+        app_name = app_name.lower()
         view_snakify = re.sub(r'(?<!^)(?=[A-Z])', '_', view_name).lower()
 
         # create views

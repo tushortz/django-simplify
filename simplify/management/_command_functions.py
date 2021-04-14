@@ -15,7 +15,7 @@ def add_app_url_to_urlpatterns(command, app_name):
         with open(project_url_path, "w") as f:
             if not re.search(r'^.*?mport.*?include', _content):
                 _content = _content.replace("from django.urls import path", 
-                            "from django.urls import path, include")
+                            "from django.urls import include, path")
             
             
             _content = _content.replace("urlpatterns = [", 
@@ -52,14 +52,16 @@ def create_templates(command, app_name, crud_value):
 
 def create_urls(command, app_name, crud_value):
     # create and populate urls
-    url_string = ""
+    url_list = []
     view_prefix = app_name.replace("_", " ").title().replace(" ", "")
 
     for c in crud_value:
         url = _messages.URL_PATTERN_MAP.get(c).format(view_prefix)
         
         if url:
-            url_string += f"    {url}"
+            url_list.append(f"    {url}")
+
+    url_string = "\n".join(url_list)
 
     urls_content = _messages.URLS_CONTENT.format(app_name, url_string)
 

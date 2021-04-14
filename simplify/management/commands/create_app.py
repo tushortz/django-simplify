@@ -23,6 +23,8 @@ class Command(BaseCommand):
         else:
             crud_value = 'crudi'
 
+        app_name = app_name.lower()
+        
         # needs a redirect to index if delete is present
         if "d" in crud_value and "i" not in crud_value:
             crud_value += "i"

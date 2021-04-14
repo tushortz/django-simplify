@@ -2,6 +2,7 @@ from django.contrib import admin
 
 
 def _a2z_filter(_field):
+    """function to generate a filter class needed to filter model fields alphanumerically"""
     class ModelFilter(admin.SimpleListFilter):
         field = _field
         title = f'alphabet - {_field.replace("_", " ")}'
@@ -28,6 +29,10 @@ def _a2z_filter(_field):
 
 
 class AlphaNumericFilterAdmin(admin.ModelAdmin):
+    """Filter class that allows filtering model class alphanumerically
+    specifying `alphanumeric_filter` in the class fields is needed before it can work.
+    For example: alphanumeric_filter = ['first_name', 'last_name']
+    """
     def __init__(self, model, admin_site):
         self.model = model
         self.opts = model._meta
