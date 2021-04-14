@@ -219,3 +219,9 @@ Todo
 .. note:: 
 
     This is still in early development mode. might have bugs. It works fine if you write good code and follow the django style of development. Please fork the project to make contributions
+
+
+Acknowledgements
+================
+
+I'd like to say a big thank you to God without which this wouldn't be possible. I would also like to say thanks to everyone who has and will contribute to this in the future.

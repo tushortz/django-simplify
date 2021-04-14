@@ -53,8 +53,10 @@ def create_templates(command, app_name, crud_value):
 def create_urls(command, app_name, crud_value):
     # create and populate urls
     url_string = ""
+    view_prefix = app_name.replace("_", " ").title().replace(" ", "")
+
     for c in crud_value:
-        url = _messages.URL_PATTERN_MAP.get(c)
+        url = _messages.URL_PATTERN_MAP.get(c).format(view_prefix)
         
         if url:
             url_string += f"    {url}\n"

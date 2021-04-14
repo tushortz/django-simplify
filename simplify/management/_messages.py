@@ -49,7 +49,7 @@ _index = """
 # /{0}
 class {1}Index(ListView):
     template_name = "{0}/index.html"
-    model = User # change this
+    model = "_MY_MODEL_HERE_"
     paginate_by = 25
 """
 
@@ -71,14 +71,15 @@ CRUDIL_MAP = {
 }
 
 URL_PATTERN_MAP = {
-    'c': "path('create', view=views.Create.as_view(), name='create'),",
-    'r': "path('<int:pk>', view=views.Detail.as_view(), name='detail'),",
-    'u': "path('<int:pk>/update', view=views.Update.as_view(), name='update'),",
-    'd': "path('<int:pk>/delete', view=views.Delete.as_view(), name='delete'),",
-    'i': "path('', view=views.Index.as_view(), name='index'),",
+    'c': "path('create', view=views.{0}Create.as_view(), name='create'),",
+    'r': "path('<int:pk>', view=views.{0}Detail.as_view(), name='detail'),",
+    'u': "path('<int:pk>/update', view=views.{0}Update.as_view(), name='update'),",
+    'd': "path('<int:pk>/delete', view=views.{0}Delete.as_view(), name='delete'),",
+    'i': "path('', view=views.{0}Index.as_view(), name='index'),",
     # '_': "path('', view=views.{0}.as_view(), name='index'),",
 }
 
+# for the html templates
 ACTION_MAP = {
     "c": 'Create',
     "r": 'Detail',
@@ -90,8 +91,9 @@ ACTION_MAP = {
 def generate_view_content(app_name, crudil_string='crudi'):
     crudil = list(crudil_string.replace(" ", ''))
     view_content = ""
+    view_prefix = app_name.replace("_", " ").title().replace(" ", "")
 
     for c in crudil:
         if c in CRUDIL_MAP:
-            view_content += CRUDIL_MAP[c].format(app_name) + "\n"
+            view_content += CRUDIL_MAP[c].format(app_name, view_prefix) + "\n"
     return IMPORTS + view_content
