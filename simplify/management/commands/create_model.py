@@ -42,7 +42,7 @@ class Command(BaseCommand):
         for mf in model_fields:
             field, data_type, *relationship = re.split(r'[:=]', mf)
 
-            if data_type.startswith("date"): import_timezone = True
+            if data_type.startswith("date") or data_type == "dt": import_timezone = True
             if relationship: relationship = relationship[0]
             _field_template += _helper.MODEL_FIELD_TEMPLATE.format(field, _helper.FIELD_MAPPERS[data_type].format(relationship))
 
@@ -52,10 +52,10 @@ class Command(BaseCommand):
         with open(model_path, mode) as f:
             content = f.read()
 
-        auto_import = "from simplify.helpers.model_helper import TimeBasedModel\n"
+        auto_import = "from simplify.helpers.model_helper import TimeBasedModel"
         model_import = "from django.db import models"
         if import_timezone and not auto_import in content:
-            auto_import += "from django.utils import timezone\n"
+            auto_import += "\nfrom django.utils import timezone\n"
 
         # prevent import if already present
         if model_import in content and not auto_import in content:
