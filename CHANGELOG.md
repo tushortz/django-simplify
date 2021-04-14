@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixes
 - fixed generated `urls.py` adding url paths on newline
-- - fixed `include` being imported multiple times for every app
+- fixed `include` being imported multiple times for every app
 
 ## [0.1.4] - 2021-04-14
 ### Removed
