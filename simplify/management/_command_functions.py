@@ -54,9 +54,10 @@ def create_urls(command, app_name, crud_value):
     # create and populate urls
     url_list = []
     view_prefix = app_name.replace("_", " ").title().replace(" ", "")
-
+    app_name = app_name.lower()
+    
     for c in crud_value:
-        url = _messages.URL_PATTERN_MAP.get(c).format(view_prefix)
+        url = _messages.URL_PATTERN_MAP.get(c).format(view_prefix, app_name)
         
         if url:
             url_list.append(f"    {url}")

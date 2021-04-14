@@ -70,11 +70,11 @@ CRUDIL_MAP = {
 }
 
 URL_PATTERN_MAP = {
-    'c': "path('create', view=views.{0}Create.as_view(), name='create'),",
-    'r': "path('<int:pk>', view=views.{0}Detail.as_view(), name='detail'),",
-    'u': "path('<int:pk>/update', view=views.{0}Update.as_view(), name='update'),",
-    'd': "path('<int:pk>/delete', view=views.{0}Delete.as_view(), name='delete'),",
-    'i': "path('', view=views.{0}Index.as_view(), name='index'),",
+    'c': "path('create', view=views.{0}Create.as_view(), name='{1}-create'),",
+    'r': "path('<int:pk>', view=views.{0}Detail.as_view(), name='{1}-detail'),",
+    'u': "path('<int:pk>/update', view=views.{0}Update.as_view(), name='{1}-update'),",
+    'd': "path('<int:pk>/delete', view=views.{0}Delete.as_view(), name='{1}-delete'),",
+    'i': "path('', view=views.{0}Index.as_view(), name='{1}-index'),",
     # '_': "path('', view=views.{0}.as_view(), name='index'),",
 }
 
