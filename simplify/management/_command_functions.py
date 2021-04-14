@@ -13,7 +13,7 @@ def add_app_url_to_urlpatterns(command, app_name):
         
     if not f"{app_name}.urls" in _content:
         with open(project_url_path, "w") as f:
-            if not re.search(r'import.*?include', _content):
+            if not re.search(r'^.*?mport.*?include', _content):
                 _content = _content.replace("from django.urls import path", 
                             "from django.urls import path, include")
             
@@ -59,7 +59,7 @@ def create_urls(command, app_name, crud_value):
         url = _messages.URL_PATTERN_MAP.get(c).format(view_prefix)
         
         if url:
-            url_string += f"    {url}\n"
+            url_string += f"    {url}"
 
     urls_content = _messages.URLS_CONTENT.format(app_name, url_string)
 

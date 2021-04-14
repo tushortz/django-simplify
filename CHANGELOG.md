@@ -5,6 +5,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [0.1.4] - 2021-04-14
+### Removed
+- removed unnecessary user import statement in stub
+
+### Fixed
+- fixed `include` not being imported in `urls.py`
+- fixed extra unnecessary new line in `urls.py` creation
+
+
 ## [0.1.3] - 2021-04-14
 ### Fixed
 - fixed error caused due to extra format parameter added in 0.1.2

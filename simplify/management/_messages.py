@@ -10,13 +10,12 @@ urlpatterns = [
 IMPORTS = """from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
-from django.contrib.auth.models import User
 
 """
 
 
 _create = """ 
-# /{0}/add
+# /{0}/create
 class {1}Create(CreateView):
     template_name = "{0}/create.html"
     model = "_MY_MODEL_HERE_"
