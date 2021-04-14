@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.7 - 0.1.9] - 2021-04-14
 ### Fixes
-- fixed simplify not importing timezone when `dt` is used as model field type
+- fixed simplify not importing timezone when `dt` or `date` is used as model field type
 - 
 ## [0.1.6] - 2021-04-14
 ### Added
