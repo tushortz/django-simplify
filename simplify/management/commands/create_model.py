@@ -52,15 +52,21 @@ class Command(BaseCommand):
         with open(model_path, mode) as f:
             content = f.read()
 
-        auto_import = "from simplify.helpers.model_helper import TimeBasedModel\n"
+        auto_import = "from simplify.helpers.model_helper import TimeBasedModel"
+        timezone_import = "from django.utils import timezone"
         model_import = "from django.db import models"
-        if import_timezone and not auto_import in content:
-            auto_import += "from django.utils import timezone\n"
+        full_import = model_import
+
+        if import_timezone and timezone_import not in content:
+            full_import += f"\n{timezone_import}\n"
+        
+        if auto_import not in content:
+            full_import += f"\n{auto_import}\n"
 
         # prevent import if already present
-        if model_import in content and not auto_import in content:
+        if model_import in content:
             with open(f"{app_name}/models.py", "w") as f:
-                content = content.replace(model_import, auto_import + model_import)
+                content = content.replace(model_import, full_import)
                 f.write(content)
 
         if not _model_template in content:
