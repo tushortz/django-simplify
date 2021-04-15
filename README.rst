@@ -30,12 +30,7 @@ Installation
 Then just add `simplify` to your `INSTALLED_APPS`.
 
 
-Below are several example commands you can run.
-
-.. code-block:: bash
-
-    $ python manage.py create_app <app_name>
-
+Tutorial videos can be found on this `Youtube playlist <https://www.youtube.com/playlist?list=PLXg2mG-YST5CG7eFCLBbAH4s4lDqCFRdh>`_.
 
 Features
 -----------
