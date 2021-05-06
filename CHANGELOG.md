@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - removed model dependency on simplify so that you can still have your code running even when thesimplify package has been uninstalled and removed from `settings.INSTALLED_APPS`
 - replaced `simplify.helpers.model_helper` and `simplify.helpers.admin_helper` with `simplify.utils`
+
+### Added
 - added `ListView` scaffold so you can include `l` in `crudil` parameter when running `python manage.py create_view crudil`
 -
 ## [0.1.7 - 0.1.9] - 2021-04-14
