@@ -105,6 +105,7 @@ will generate the following code in the `member/models.py` file
         first_name = models.CharField(max_length=50)
         last_name = models.CharField(max_length=50)
         age = models.IntegerField(default=0)
+
         created_at = models.DateTimeField(auto_now_add=True)
         updated_at = models.DateTimeField(auto_now=True)
 
