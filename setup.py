@@ -50,7 +50,7 @@ if __name__ == '__main__':
         keywords=about['__keywords__'],
         package_data={
             'simplify': [
-                'helpers/**/**',
+                './**/**',
                 'management/**/**',
             ],
         },

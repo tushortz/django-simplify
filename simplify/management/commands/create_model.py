@@ -10,7 +10,7 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument('params', nargs='+', type=str)
-        
+
 
     def handle(self, *args, **options):
         params = options['params']
@@ -20,11 +20,11 @@ class Command(BaseCommand):
             self.stdout.write(self.style.WARNING('python manage.py create_model <app_name> <model_name> [fields:data_type, ]'))
             return
 
-        
+
         app_name, model_name, *model_fields = params
         app_name = app_name.lower()
 
-        _model_template = f"class {model_name}(TimeBasedModel):\n"
+        _model_template = f"class {model_name}(models.Model):\n"
         _field_template = ""
         _to_string = "\n    def __str__(self):\n        return self.{}\n"
         model_path = f"{app_name}/models.py"
@@ -46,22 +46,24 @@ class Command(BaseCommand):
             if relationship: relationship = relationship[0]
             _field_template += _helper.MODEL_FIELD_TEMPLATE.format(field, _helper.FIELD_MAPPERS[data_type].format(relationship))
 
+        _field_template += ("\n" + _helper.MODEL_FIELD_TEMPLATE.format('created_at', 'models.DateTimeField(auto_now_add=True)'))
+        _field_template += _helper.MODEL_FIELD_TEMPLATE.format('updated_at', 'models.DateTimeField(auto_now=True)')
+
         model_code = "\n\n" + _model_template + _field_template + _to_string.format(model_fields[0].split(":")[0])
 
 
         with open(model_path, mode) as f:
             content = f.read()
 
-        auto_import = "from simplify.helpers.model_helper import TimeBasedModel"
         timezone_import = "from django.utils import timezone"
         model_import = "from django.db import models"
         full_import = model_import
 
+        if model_import not in content:
+            full_import += f"\n{model_import}\n"
+
         if import_timezone and timezone_import not in content:
             full_import += f"\n{timezone_import}\n"
-        
-        if auto_import not in content:
-            full_import += f"\n{auto_import}\n"
 
         # prevent import if already present
         if model_import in content:
@@ -74,13 +76,13 @@ class Command(BaseCommand):
                     f.write(model_code)
                     self.stdout.write(self.style.SUCCESS(f'{app_name}/models.py" updated'))
 
-        # update admin.py      
+        # update admin.py
         with open(f"{app_name}/admin.py") as f:
             content = f.read()
 
         # dont add to admin if already present
         if re.search(rf".register.*?{model_name}", content):
-            self.stdout.write(self.style.WARNING()(f'{app_name}.{model_name} has already been registered'))
+            self.stdout.write(self.style.WARNING(f'{app_name}.{model_name} has already been registered'))
 
             return
 
@@ -95,7 +97,7 @@ class {model_name}Admin(admin.ModelAdmin):
 
 """
 
-            
+
             admin_data = import_ + content + admin_
             f.write(admin_data)
             self.stdout.write(self.style.SUCCESS(f'{app_name}/admin.py" updated'))

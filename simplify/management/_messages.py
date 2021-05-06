@@ -14,7 +14,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 """
 
 
-_create = """ 
+_create = """
 # /{0}/create
 class {1}Create(CreateView):
     template_name = "{0}/create.html"
@@ -46,8 +46,14 @@ class {1}Delete(DeleteView):
 
 _index = """
 # /{0}
-class {1}Index(ListView):
+class {1}Index(TemplateView):
     template_name = "{0}/index.html"
+"""
+
+_list = """
+# /{0}
+class {1}List(ListView):
+    template_name = "{0}/list.html"
     model = "_MY_MODEL_HERE_"
     paginate_by = 25
 """
@@ -56,8 +62,6 @@ _template = """
 # /{0}
 class {1}Index(TemplateView):
     template_name = "{0}/{2}_{3}.html"
-    model = User # change this
-    paginate_by = 25
 """
 
 CRUDIL_MAP = {
@@ -66,15 +70,16 @@ CRUDIL_MAP = {
     "u": _update,
     "d": _delete,
     "i": _index,
-    # '_': _template
+    'l': _list
 }
 
 URL_PATTERN_MAP = {
-    'c': "path('create', view=views.{0}Create.as_view(), name='{1}-create'),",
-    'r': "path('<int:pk>', view=views.{0}Detail.as_view(), name='{1}-detail'),",
-    'u': "path('<int:pk>/update', view=views.{0}Update.as_view(), name='{1}-update'),",
-    'd': "path('<int:pk>/delete', view=views.{0}Delete.as_view(), name='{1}-delete'),",
-    'i': "path('', view=views.{0}Index.as_view(), name='{1}-index'),",
+    'c': "path('create', view=views.{0}Create.as_view(), name='create'),",
+    'r': "path('<int:pk>', view=views.{0}Detail.as_view(), name='detail'),",
+    'u': "path('<int:pk>/update', view=views.{0}Update.as_view(), name='update'),",
+    'd': "path('<int:pk>/delete', view=views.{0}Delete.as_view(), name='delete'),",
+    'i': "path('', view=views.{0}Index.as_view(), name='index'),",
+    'l': "path('', view=views.{0}List.as_view(), name='list'),",
     # '_': "path('', view=views.{0}.as_view(), name='index'),",
 }
 
@@ -85,6 +90,7 @@ ACTION_MAP = {
     "u": 'Update',
     "d": '',
     "i": 'Index',
+    "l": 'List',
 }
 
 def generate_view_content(app_name, crudil_string='crudi'):

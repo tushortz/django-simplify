@@ -19,7 +19,8 @@ class Command(BaseCommand):
 
         app_name, view_name, *crud_value = params
         app_name = app_name.lower()
-        view_snakify = re.sub(r'(?<!^)(?=[A-Z])', '_', view_name).lower()
+        view_snakify = str(view_name).strip().replace(' ', '_')
+        view_snakify = re.sub(r'(?u)[^-\w.]', '', view_snakify)
 
         # create views
         with open(f"{app_name}/views.py", "a") as f:

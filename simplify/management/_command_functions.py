@@ -7,18 +7,18 @@ import os
 def add_app_url_to_urlpatterns(command, app_name):
     # update project urls
     project_url_path = f'{settings.ROOT_URLCONF.replace(".", "/")}.py'
-    
+
     with open(project_url_path) as f:
         _content = f.read()
-        
+
     if not f"{app_name}.urls" in _content:
         with open(project_url_path, "w") as f:
             if not re.search(r'^.*?mport.*?include', _content):
-                _content = _content.replace("from django.urls import path", 
+                _content = _content.replace("from django.urls import path",
                             "from django.urls import include, path")
-            
-            
-            _content = _content.replace("urlpatterns = [", 
+
+
+            _content = _content.replace("urlpatterns = [",
                 f"urlpatterns = [\n    path('{app_name}/', include('{app_name}.urls', namespace='{app_name}')),")
             f.write(_content)
             command.stdout.write(command.style.SUCCESS(f'-- {app_name}/urls.py updated'))
@@ -40,10 +40,10 @@ def create_templates(command, app_name, crud_value):
     os.makedirs(path, exist_ok=True)
     for c in crud_value:
         action = _messages.ACTION_MAP.get(c)
-        
+
         if action:
             html_file_path = f"{path}/{action.lower()}.html"
-            
+
             if not os.path.exists(html_file_path):
                 with open(html_file_path, "w") as f:
                     f.write(f"<h1>{app_name.title()} {action.title()}</h1>")
@@ -55,10 +55,10 @@ def create_urls(command, app_name, crud_value):
     url_list = []
     view_prefix = app_name.replace("_", " ").title().replace(" ", "")
     app_name = app_name.lower()
-    
+
     for c in crud_value:
-        url = _messages.URL_PATTERN_MAP.get(c).format(view_prefix, app_name)
-        
+        url = _messages.URL_PATTERN_MAP.get(c).format(view_prefix)
+
         if url:
             url_list.append(f"    {url}")
 
@@ -92,7 +92,7 @@ def create_urls(command, app_name, crud_value):
 def issue_warning(command):
     command.stdout.write(command.style.WARNING('''
 use command:  python manage.py create_app <app_name> [optional:crudi_option].
-Where 
+Where
     c -> create
     r -> read
     u -> update
