@@ -29,8 +29,11 @@ Installation
 
 Then just add `simplify` to your `INSTALLED_APPS`.
 
+Learning Resources
+-------------------
 
-Tutorial videos can be found on this `Youtube playlist <https://www.youtube.com/playlist?list=PLXg2mG-YST5CG7eFCLBbAH4s4lDqCFRdh>`_.
+- Tutorial videos can be found on this `Youtube playlist <https://www.youtube.com/playlist?list=PLXg2mG-YST5CG7eFCLBbAH4s4lDqCFRdh>`_.
+- documentation link - https://django-simplify.readthedocs.io
 
 Features
 -----------
